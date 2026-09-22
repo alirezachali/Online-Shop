@@ -22,6 +22,8 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 
+.ohmyagent
+
 /public/build
 /storage/pail
 .env.backup
