@@ -4,5 +4,23 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Vazirmatn', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Vazirmatn', ui-sans-serif, system-ui, sans-serif;
+    --color-cream: #f4efe6;
+    --color-ink: #1c1915;
+    --color-olive: #1f3d2b;
+    --color-saffron: #e0a106;
+    --color-terracotta: #b4533a;
+}
+
+.pattern-veil {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.07;
+    background-image:
+        radial-gradient(circle at 20% 20%, #1f3d2b 1.5px, transparent 1.6px),
+        radial-gradient(circle at 80% 40%, #e0a106 1.2px, transparent 1.3px);
+    background-size: 28px 28px, 42px 42px;
 }

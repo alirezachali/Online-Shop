@@ -36,3 +36,21 @@ test('catalog ingest upserts products from the pos', function () {
         ->name->toBe('آب')
         ->sell_price->toBe('15000.00');
 });
+
+test('catalog ingest stores public shop settings from pos', function () {
+    config(['integration.token' => 'secret-token']);
+
+    $this->withToken('secret-token')
+        ->postJson('/api/catalog/ingest', [
+            'settings' => [
+                'store_name' => 'سوپرمارکت نمونه',
+                'phone' => '02112345678',
+                'currency' => 'تومان',
+                'city' => 'تهران',
+            ],
+        ])
+        ->assertOk();
+
+    expect(\App\Support\Storefront::name())->toBe('سوپرمارکت نمونه');
+    expect(\App\Support\Storefront::currency())->toBe('تومان');
+});

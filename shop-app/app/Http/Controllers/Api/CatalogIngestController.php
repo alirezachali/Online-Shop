@@ -16,7 +16,7 @@ class CatalogIngestController extends Controller
             'categories.*.source_id' => ['required', 'integer'],
             'categories.*.name' => ['required', 'string', 'max:255'],
             'categories.*.is_active' => ['sometimes', 'boolean'],
-            'products' => ['required', 'array', 'min:1'],
+            'products' => ['sometimes', 'array'],
             'products.*.source_id' => ['required', 'integer'],
             'products.*.name' => ['required', 'string', 'max:255'],
             'products.*.barcode' => ['nullable', 'string', 'max:50'],
@@ -25,9 +25,25 @@ class CatalogIngestController extends Controller
             'products.*.stock' => ['sometimes', 'numeric', 'min:0'],
             'products.*.unit' => ['sometimes', 'string', 'max:20'],
             'products.*.is_active' => ['sometimes', 'boolean'],
+            'settings' => ['sometimes', 'array'],
+            'settings.store_name' => ['sometimes', 'nullable', 'string', 'max:150'],
+            'settings.phone' => ['sometimes', 'nullable', 'string', 'max:32'],
+            'settings.mobile' => ['sometimes', 'nullable', 'string', 'max:32'],
+            'settings.address' => ['sometimes', 'nullable', 'string', 'max:500'],
+            'settings.website' => ['sometimes', 'nullable', 'string', 'max:255'],
+            'settings.currency' => ['sometimes', 'nullable', 'string', 'max:32'],
+            'settings.receipt_footer' => ['sometimes', 'nullable', 'string', 'max:500'],
+            'settings.tax_rate' => ['sometimes', 'nullable', 'string', 'max:16'],
+            'settings.city' => ['sometimes', 'nullable', 'string', 'max:100'],
+            'settings.store_logo_url' => ['sometimes', 'nullable', 'string', 'max:2048'],
+            'settings.store_logo_base64' => ['sometimes', 'nullable', 'string'],
         ]);
 
-        $sync->ingest($data['categories'] ?? [], $data['products']);
+        $sync->ingest(
+            $data['categories'] ?? [],
+            $data['products'] ?? [],
+            $data['settings'] ?? [],
+        );
 
         return response()->json(['ok' => true]);
     }
