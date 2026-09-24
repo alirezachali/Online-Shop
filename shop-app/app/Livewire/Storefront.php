@@ -16,6 +16,12 @@ class Storefront extends Component
 
     public string $search = '';
 
+    public function mount(): void
+    {
+        $category = request()->integer('category');
+        $this->categoryId = $category > 0 ? $category : null;
+    }
+
     public function filterCategory(?int $id): void
     {
         $this->categoryId = $id;

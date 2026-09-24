@@ -19,6 +19,16 @@ class Checkout extends Component
 
     public ?int $orderId = null;
 
+    public function mount(): void
+    {
+        $user = auth()->user();
+        if ($user) {
+            $this->name = (string) $user->name;
+            $this->phone = (string) ($user->phone ?? '');
+            $this->address = (string) ($user->address ?? '');
+        }
+    }
+
     public function place(Cart $cart, PlaceOrderService $orders): void
     {
         $this->validate([

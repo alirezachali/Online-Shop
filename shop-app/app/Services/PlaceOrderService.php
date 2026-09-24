@@ -31,6 +31,7 @@ class PlaceOrderService
             }
 
             $order = Order::query()->create([
+                'user_id' => $customer['user_id'] ?? auth()->id(),
                 'idempotency_key' => $key,
                 'status' => 'pending',
                 'customer_name' => $customer['name'] ?? null,
